@@ -1,0 +1,76 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  margin-left: 20px;
+}
+
+textarea {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  resize: none;
+
+}
+
+.creacionNotas {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+}
+
+.creacionNotas p {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+#input_titulo {
+  font-size: 20px;
+  height: 30px;
+}
+
+#input_cuerpo {
+  font-size: 16px;
+  height: 300px;
+  text-align: left;
+
+}
+
+.creacionNotas button {
+  margin-top: 20px;
+  height: 50px;
+  width: 150px;
+  align-self: center;
+  cursor: pointer;
+}
+
+/* --------------------------------------------- ESTILOS MODALES --------------------------------------------- */
+
+.modalInner {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  background-color: rgb(223, 237, 241);
+  padding: 20px;
+  width: 400px;
+  border-radius: 5px;
+  border: solid 1px darkgrey;
+}
+
+.modalTitulo {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.modalCuerpo {
+  margin: 10px 0px;
+}
+
+.modalBtn {
+  width: 100px;
+  height: 35px;
+  background-color: rgb(198, 229, 241);
+  border-radius: 5px;
+  border: solid 1px darkgrey;
+  cursor: pointer;
+}
