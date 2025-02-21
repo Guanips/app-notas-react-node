@@ -1,3 +1,5 @@
+/* --------------------------------------------- ESTILOS GLOBALES --------------------------------------------- */
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -11,6 +13,8 @@ textarea {
   resize: none;
 
 }
+
+/* --------------------------------------------- ESTILOS AREA CREACION NOTAS --------------------------------------------- */
 
 .creacionNotas {
   width: 350px;
