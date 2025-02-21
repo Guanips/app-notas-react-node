@@ -1,0 +1,18 @@
+.notaCompleta {
+    background-color: rgb(124, 223, 226);
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.tituloCompleta {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.cuerpoCompleta {
+    margin-top: 5px;
+}
