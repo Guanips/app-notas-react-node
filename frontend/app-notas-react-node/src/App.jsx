@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import { parseJSON } from "date-fns"
 import axios from "axios"
 import './App.css'
 import ObjetoNota from './components/ObjetoNota/ObjetoNota'
@@ -20,7 +21,12 @@ function App() {
       return
     }
 
-    console.log(listaNotas)
+    if (listaNotas.length != 0) {
+      console.log(listaNotas)
+
+    }
+
+
   }, [listaNotas])
 
   const crearNota = () => {
@@ -33,7 +39,9 @@ function App() {
 
       setContenidoModal({ titulo: res.data.status, cuerpo: res.data.cuerpo })
       setIsOpen(true)
-
+      if (res.data.status == "exito") {
+        obtenerNotas();
+      }
     })
 
     setValorTitulo("")
@@ -69,10 +77,10 @@ function App() {
         {/* -------------------------- AREA DISPLAY DE NOTAS ---------------------------------- */}
 
         <div className='displayNotas'>
-          <button onClick={obtenerNotas}>Obtener Notas</button>
+          <button onClick={obtenerNotas}>Refrescar Notas</button>
           {
             listaNotas.map(nota => (
-              <ObjetoNota titulo={nota.titulo} cuerpo={nota.cuerpo} fecha_creacion={nota.fecha_creacion} />
+              <ObjetoNota key={nota.ID_nota} titulo={nota.titulo} cuerpo={nota.cuerpo} fecha_creacion={nota.fecha_creacion.substring(0, 10)} />
             ))
           }
         </div>
@@ -83,11 +91,11 @@ function App() {
 
       {/* -------------------------- MODALES ---------------------------------- */}
 
-      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="modal">
-        <DialogPanel className="modalInner">
-          <DialogTitle className="modalTitulo">{contenidoModal.titulo}</DialogTitle>
-          <Description className="modalCuerpo">{contenidoModal.cuerpo}</Description>
-          <button onClick={() => setIsOpen(false)} className='modalBtn'>Ok</button>
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="modalAlerta">
+        <DialogPanel className="modalAlertaInner">
+          <DialogTitle className="modalAlertaTitulo">{contenidoModal.titulo}</DialogTitle>
+          <Description className="modalAlertaCuerpo">{contenidoModal.cuerpo}</Description>
+          <button onClick={() => setIsOpen(false)} className='modalAlertaBtn'>Ok</button>
         </DialogPanel>
       </Dialog>
 

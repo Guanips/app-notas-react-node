@@ -14,14 +14,20 @@ textarea {
 
 }
 
+button {
+  cursor: pointer;
+}
+
 .contenedorGeneral {
   display: flex;
+  align-items: center;
 }
 
 /* --------------------------------------------- ESTILOS AREA CREACION NOTAS --------------------------------------------- */
 
 .creacionNotas {
   width: 350px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   margin-left: 50px;
@@ -56,12 +62,22 @@ textarea {
 
 .displayNotas {
   margin-left: 50px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.displayNotas button {
+  width: 150px;
+  height: 50px;
 }
 
 /* --------------------------------------------- ESTILOS MODALES --------------------------------------------- */
 
-.modalInner {
-  position: absolute;
+.modalAlertaInner {
+  position: fixed;
   left: 20px;
   bottom: 20px;
   background-color: rgb(223, 237, 241);
@@ -71,16 +87,16 @@ textarea {
   border: solid 1px darkgrey;
 }
 
-.modalTitulo {
+.modalAlertaTitulo {
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
-.modalCuerpo {
+.modalAlertaCuerpo {
   margin: 10px 0px;
 }
 
-.modalBtn {
+.modalAlertaBtn {
   width: 100px;
   height: 35px;
   background-color: rgb(198, 229, 241);

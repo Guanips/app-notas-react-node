@@ -24,11 +24,14 @@ app.post("/crear_nota", async (req, res) => {
     console.log(req.body)
     if (req.body.titulo_nota != "" && req.body.cuerpo_nota != "") {
         await pool.query(`INSERT INTO notas (titulo, cuerpo, ID_creador) VALUES ("${req.body.titulo_nota}", "${req.body.cuerpo_nota}", 1);`)
-
+        res.send({
+            status: "exito",
+            cuerpo: "Nota creada exitosamente."
+        })
     } else {
         res.send({
             status: "Error",
-            cuerpo: "No se puede crear una nota vacia"
+            cuerpo: "No se puede crear una nota vacia."
         })
     }
 
@@ -40,6 +43,6 @@ app.get("/obtener_usuarios", async (req, res) => {
 })
 
 app.get("/obtener_notas", async (req, res) => {
-    const [notas] = await pool.query("SELECT titulo, cuerpo, fecha_creacion FROM notas")
+    const [notas] = await pool.query("SELECT ID_nota, titulo, cuerpo, fecha_creacion FROM notas")
     res.send(notas)
 })

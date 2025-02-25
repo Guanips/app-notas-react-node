@@ -1,18 +1,50 @@
-.notaCompleta {
-    background-color: rgb(124, 223, 226);
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 300px;
+.miniaturaNota {
+    background-color: rgba(1, 255, 255, 0.205);
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: solid 1px rgb(94, 94, 94);
+    width: 220px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.modalNotaInner {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.432);
+}
+
+.contenidoModalNota {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    padding: 20px;
+    background-color: aliceblue;
     border-radius: 5px;
 }
 
-.tituloCompleta {
-    font-size: 20px;
-    font-weight: bold;
+.modalNotaTitulo {
     margin-top: 0px;
     margin-bottom: 10px;
 }
 
-.cuerpoCompleta {
-    margin-top: 5px;
+.modalNotaCuerpo {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.modalNotaBtn {
+    position: absolute;
+    width: 100px;
+    height: 45px;
+    bottom: 20px;
+    right: 20px;
 }
