@@ -2,9 +2,13 @@ import express from "express"
 import cors from "cors"
 import mysql from "mysql2"
 import dotenv from "dotenv"
+import {JSDOM} from "jsdom"
+import DOMPurify from "dompurify"
 
 const port = 3000;
 const app = express();
+const window = new JSDOM('').window;
+const purify = DOMPurify(window);
 dotenv.config();
 
 const pool = mysql.createPool({
@@ -22,8 +26,9 @@ app.listen(port, () => {
 
 app.post("/crear_nota", async (req, res) => {
     console.log(req.body)
+    const cuerpo_nota_purificado = purify.sanitize(req.body.cuerpo_nota)
     if (req.body.titulo_nota != "" && req.body.cuerpo_nota != "") {
-        await pool.query(`INSERT INTO notas (titulo, cuerpo, ID_creador) VALUES ("${req.body.titulo_nota}", "${req.body.cuerpo_nota}", 1);`)
+        await pool.query(`INSERT INTO notas (titulo, cuerpo, ID_creador) VALUES ('${req.body.titulo_nota}', '${cuerpo_nota_purificado}', 1);`)
         res.send({
             status: "exito",
             cuerpo: "Nota creada exitosamente."
@@ -32,6 +37,25 @@ app.post("/crear_nota", async (req, res) => {
         res.send({
             status: "Error",
             cuerpo: "No se puede crear una nota vacia."
+        })
+    }
+
+})
+
+app.post("/editar_nota", async (req, res) => {
+    const id_nota = parseInt(req.body.id_nota)
+
+    try {
+        await pool.query(`UPDATE notas SET cuerpo = '${req.body.cuerpo_editado}' WHERE ID_nota = ${id_nota};`)
+        res.send({
+            status: "Exito",
+            cuerpo: "Nota editada exitosamente"
+        })
+    } catch (error) {
+        console.log(error)
+        res.send({
+            status: "ERROR",
+            cuerpo: error
         })
     }
 

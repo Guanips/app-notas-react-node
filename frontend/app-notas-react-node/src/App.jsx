@@ -4,6 +4,7 @@ import { parseJSON } from "date-fns"
 import axios from "axios"
 import './App.css'
 import ObjetoNota from './components/ObjetoNota/ObjetoNota'
+import EditorQuill from './components/EditorQuill/EditorQuill'
 
 function App() {
   const [valorTitulo, setValorTitulo] = useState("")
@@ -16,18 +17,8 @@ function App() {
   const firstRender = useRef(true);
 
   useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false
-      return
-    }
-
-    if (listaNotas.length != 0) {
-      console.log(listaNotas)
-
-    }
-
-
-  }, [listaNotas])
+    obtenerNotas();
+  }, [])
 
   const crearNota = () => {
     axios.post("http://localhost:3000/crear_nota", {
@@ -71,23 +62,24 @@ function App() {
           <p>Título</p>
           <input type="text" id="input_titulo" onChange={e => setValorTitulo(e.target.value)} value={valorTitulo} />
           <p>Cuerpo</p>
-          <textarea id="input_cuerpo" onChange={e => setValorCuerpo(e.target.value)} value={valorCuerpo}></textarea>
+          <div>
+            <EditorQuill valorCuerpo={valorCuerpo} setValorCuerpo={setValorCuerpo}></EditorQuill>
+          </div>
+
+
           <button onClick={crearNota} >Crear Nota</button>
         </div>
         {/* -------------------------- AREA DISPLAY DE NOTAS ---------------------------------- */}
 
         <div className='displayNotas'>
-          <button onClick={obtenerNotas}>Refrescar Notas</button>
+          {/* <button onClick={obtenerNotas}>Refrescar Notas</button> */}
           {
             listaNotas.map(nota => (
-              <ObjetoNota key={nota.ID_nota} titulo={nota.titulo} cuerpo={nota.cuerpo} fecha_creacion={nota.fecha_creacion.substring(0, 10)} />
+              <ObjetoNota key={nota.ID_nota} id_nota={nota.ID_nota} titulo={nota.titulo} cuerpo={nota.cuerpo} fecha_creacion={nota.fecha_creacion.substring(0, 10)} controlOpenModal={setIsOpen} controlContenidoModal={setContenidoModal}/>
             ))
           }
         </div>
       </div>
-
-
-
 
       {/* -------------------------- MODALES ---------------------------------- */}
 
@@ -98,6 +90,7 @@ function App() {
           <button onClick={() => setIsOpen(false)} className='modalAlertaBtn'>Ok</button>
         </DialogPanel>
       </Dialog>
+
 
     </>
   )

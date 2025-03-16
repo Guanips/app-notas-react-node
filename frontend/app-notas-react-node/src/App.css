@@ -27,7 +27,6 @@ button {
 
 .creacionNotas {
   width: 350px;
-  height: 500px;
   display: flex;
   flex-direction: column;
   margin-left: 50px;
