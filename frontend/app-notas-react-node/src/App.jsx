@@ -5,16 +5,14 @@ import axios from "axios"
 import './App.css'
 import ObjetoNota from './components/ObjetoNota/ObjetoNota'
 import EditorQuill from './components/EditorQuill/EditorQuill'
+import ModalNotificacion from './components/ModalNotificacion/ModalNotificacion'
 
 function App() {
   const [valorTitulo, setValorTitulo] = useState("")
   const [valorCuerpo, setValorCuerpo] = useState("")
-  const [contenidoModal, setContenidoModal] = useState({ titulo: "", cuerpo: "" })
-  const [listaUsuarios, setListaUsuarios] = useState([])
-  const [usuarioActual, setUsuarioActual] = useState("")
+  const [contenidoModalNotifiacion, setContenidoModalNotificacion] = useState({tipo:"", titulo: "", cuerpo: ""})
   const [listaNotas, setListaNotas] = useState([])
-  const [isOpen, setIsOpen] = useState(false)
-  const firstRender = useRef(true);
+  const [isOpenNotificacion, setIsOpenNotificacion] = useState(false)
 
   useEffect(() => {
     obtenerNotas();
@@ -28,8 +26,8 @@ function App() {
 
     }).then((res) => {
 
-      setContenidoModal({ titulo: res.data.status, cuerpo: res.data.cuerpo })
-      setIsOpen(true)
+      setContenidoModalNotificacion({tipo: res.data.status, titulo: res.data.titulo, cuerpo: res.data.cuerpo })
+      setIsOpenNotificacion(true)
       if (res.data.status == "exito") {
         obtenerNotas();
       }
@@ -45,12 +43,6 @@ function App() {
     })
   }
 
-  const obtenerUsuarios = () => {
-    axios.get("http://localhost:3000/obtener_usuarios").then((res) => {
-      setListaUsuarios(res.data)
-    })
-  }
-
   return (
     <>
       <h1>App Notas</h1>
@@ -62,7 +54,7 @@ function App() {
           <p>Título</p>
           <input type="text" id="input_titulo" onChange={e => setValorTitulo(e.target.value)} value={valorTitulo} />
           <p>Cuerpo</p>
-          <div>
+          <div className='contenedorQuill'>
             <EditorQuill valorCuerpo={valorCuerpo} setValorCuerpo={setValorCuerpo}></EditorQuill>
           </div>
 
@@ -75,7 +67,7 @@ function App() {
           {/* <button onClick={obtenerNotas}>Refrescar Notas</button> */}
           {
             listaNotas.map(nota => (
-              <ObjetoNota key={nota.ID_nota} id_nota={nota.ID_nota} titulo={nota.titulo} cuerpo={nota.cuerpo} fecha_creacion={nota.fecha_creacion.substring(0, 10)} controlOpenModal={setIsOpen} controlContenidoModal={setContenidoModal}/>
+              <ObjetoNota key={nota.ID_nota} id_nota={nota.ID_nota} titulo={nota.titulo} cuerpo={nota.cuerpo} fecha_creacion={nota.fecha_creacion.substring(0, 10)} controlOpenModal={setIsOpenNotificacion} controlContenidoModal={setContenidoModalNotificacion}/>
             ))
           }
         </div>
@@ -83,15 +75,15 @@ function App() {
 
       {/* -------------------------- MODALES ---------------------------------- */}
 
-      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="modalAlerta">
+      {/* <Dialog open={isOpenNotificacion} onClose={() => setIsOpenNotificacion(false)} className="modalAlerta">
         <DialogPanel className="modalAlertaInner">
           <DialogTitle className="modalAlertaTitulo">{contenidoModal.titulo}</DialogTitle>
           <Description className="modalAlertaCuerpo">{contenidoModal.cuerpo}</Description>
-          <button onClick={() => setIsOpen(false)} className='modalAlertaBtn'>Ok</button>
+          <button onClick={() => setIsOpenNotificacion(false)} className='modalAlertaBtn'>Ok</button>
         </DialogPanel>
-      </Dialog>
+      </Dialog> */}
 
-
+      <ModalNotificacion notificacion_tipo={contenidoModalNotifiacion.tipo} notificacion_titulo={contenidoModalNotifiacion.titulo} notificacion_cuerpo={contenidoModalNotifiacion.cuerpo} control_apertura_notificacion={setIsOpenNotificacion} estado_apertura_notificacion={isOpenNotificacion}></ModalNotificacion>
     </>
   )
 }

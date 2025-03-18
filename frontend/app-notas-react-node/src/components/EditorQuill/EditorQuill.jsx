@@ -3,7 +3,9 @@ import 'react-quill-new/dist/quill.snow.css';
 
 const EditorQuill = (props) => {
     return (
-        <ReactQuill theme="snow" value={props.valorCuerpo} onChange={props.setValorCuerpo} />
+        <>
+            <ReactQuill theme="snow" value={props.valorCuerpo} onChange={props.setValorCuerpo} />
+        </>
     )
 }
 

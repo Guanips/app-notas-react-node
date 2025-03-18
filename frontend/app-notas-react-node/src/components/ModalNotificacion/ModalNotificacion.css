@@ -1,0 +1,39 @@
+.notificacion_exito {
+    background-color: rgb(217, 248, 170);
+}
+
+.notificacion_error {
+    background-color: rgb(238, 175, 175);
+}
+
+.notificacion_alerta {
+    background-color: rgb(241, 237, 167);
+}
+
+.modalNotificacionInner {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    padding: 20px;
+    width: 400px;
+    border-radius: 5px;
+    border: solid 1px darkgrey;
+}
+
+.modalNotificacionTitulo {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.modalNotificacionCuerpo {
+    margin: 10px 0px;
+}
+
+.modalNotificacionBtn {
+    width: 100px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.486);
+    border-radius: 5px;
+    border: solid 1px darkgrey;
+    cursor: pointer;
+}

@@ -26,7 +26,7 @@ button {
 /* --------------------------------------------- ESTILOS AREA CREACION NOTAS --------------------------------------------- */
 
 .creacionNotas {
-  width: 350px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   margin-left: 50px;
@@ -37,17 +37,15 @@ button {
   font-weight: 500;
 }
 
+.contenedorQuill {
+  height: 350px;
+}
+
 #input_titulo {
   font-size: 20px;
   height: 30px;
 }
 
-#input_cuerpo {
-  font-size: 16px;
-  height: 300px;
-  text-align: left;
-
-}
 
 .creacionNotas button {
   margin-top: 20px;
